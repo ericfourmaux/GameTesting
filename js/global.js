@@ -28,13 +28,17 @@ function update() {
     player.gravity = 1.3;
   }
 
-  if (fire) {
-    bullet.y = player.y / 2;
+  if (fire && !bullet.hasFired) {
+    bullet.x = player.x + (player.w);
+    bullet.y = player.y + (player.h / 3);
+    bullet.x += bullet.vx;
+    bullet.hasFired = true;
   }
 
   player.x += player.vx;
   player.y += player.vy;
   player.vy += player.gravity;
+  //bullet.hasFired = false;
 
   if (player.isOnGround) {
     player.vx *= player.friction;
@@ -48,7 +52,7 @@ function update() {
 
 
 
-document.getElementById("stats").innerHTML = "player.vx: " + Math.floor(player.vx) + "\n" +
+document.getElementById("stats").innerHTML = "player.vx: " + Math.floor(player.vx) + " - " +
                                              "player.vy: " + Math.floor(player.vy);
 
 
@@ -67,4 +71,9 @@ function render() {
 
   //Display player
     ctx.fillRect(player.x, player.y, player.w, player.h);
+
+  //Display bullet
+  if (bullet.hasFired) {
+    ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+  }
 }
