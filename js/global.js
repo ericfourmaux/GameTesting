@@ -18,9 +18,8 @@ function update() {
 
   if (jump && player.isOnGround) {
     player.isOnGround = false;
-    player.vy += player.gravity;
-    player.friction = 1.2;
-    //player.vy -= player.jumpForce / .99999;
+    player.friction = 7;
+    player.vy -= player.gravity * player.friction;
   }
 
   if (!goLeft && !goRight && !jump) {
