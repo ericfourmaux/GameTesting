@@ -28,6 +28,10 @@ function update() {
     player.gravity = 1.3;
   }
 
+  if (fire) {
+    bullet.y = player.y / 2;
+  }
+
   player.x += player.vx;
   player.y += player.vy;
   player.vy += player.gravity;
