@@ -2,22 +2,25 @@ var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext("2d");
 update();
 
+
+
 function update() {
   requestAnimationFrame(update, canvas);
   if (goLeft && !goRight) {
     player.vx -= 1;
-    player.friction = 1;
+    player.friction = .9;
   }
 
   if (goRight && !goLeft) {
     player.vx += 1;
-    player.friction = 1;
+    player.friction = .9;
   }
 
   if (jump && player.isOnGround) {
     player.isOnGround = false;
-    player.friction = 1;
-    player.vy += player.jumpForce / .99999;
+    player.vy += player.gravity;
+    player.friction = 1.2;
+    //player.vy -= player.jumpForce / .99999;
   }
 
   if (!goLeft && !goRight && !jump) {
@@ -39,6 +42,12 @@ function update() {
     player.isOnGround = true;
     player.vy -= player.gravity;
   }
+
+
+
+document.getElementById("stats").innerHTML = "player.vx: " + Math.floor(player.vx) + "\n" +
+                                             "player.vy: " + Math.floor(player.vy);
+
 
   render();
 }

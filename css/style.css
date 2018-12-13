@@ -2,3 +2,12 @@ canvas {
     border:1px solid #d3d3d3;
     background-color: #f1f1f1;
 }
+
+#stats {
+  width: 300px;
+  margin-top: 14px;
+  border:1px solid #e3e3e3;
+  background-color: #f2f2f2;
+  text-align: left;
+  padding-left: 7px;
+}
