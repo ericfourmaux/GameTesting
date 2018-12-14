@@ -7,7 +7,5 @@ var bullet = {
   vx : 0,
   vy : 0,
 
-  hasFired : false,
-
-  friction : 0.3
+  hasFired : false
 }

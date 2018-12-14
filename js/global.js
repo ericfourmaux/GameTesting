@@ -28,12 +28,19 @@ function update() {
     player.gravity = 1.3;
   }
 
-  if (fire && !bullet.hasFired) {
-    bullet.x = player.x + (player.w);
+  if (fire) {
+    bullet.x = player.x + (player.w + 1);
     bullet.y = player.y + (player.h / 3);
     bullet.x += bullet.vx;
     bullet.hasFired = true;
+    //console.log(bullet.hasFired);
   }
+
+/*
+  if (!fire) {
+    bullet.hasFired = false;
+  }
+*/
 
   player.x += player.vx;
   player.y += player.vy;
@@ -53,7 +60,8 @@ function update() {
 
 
 document.getElementById("stats").innerHTML = "player.vx: " + Math.floor(player.vx) + " - " +
-                                             "player.vy: " + Math.floor(player.vy);
+                                             "player.vy: " + Math.floor(player.vy) + " - " +
+                                             "bullet : " + bullet.hasFired;
 
 
   render();
@@ -75,5 +83,11 @@ function render() {
   //Display bullet
   if (bullet.hasFired) {
     ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+    do {
+      bullet.x += bullet.vx;
+      bullet.vx += 4;
+    }
+    while (bullet.x < canvas.width);
+    bullet.hasFired = false;
   }
 }
