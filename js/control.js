@@ -5,11 +5,12 @@ var   up      =  38,
       down    =  40,
       right   =  39,
       left    =  37,
-      fire    =  32,
+      space   =  32,
       goRight =  false,
       goLeft  =  false,
       goDown  =  false,
-      jump    =  false;
+      jump    =  false,
+      fire    =  false;
 
 function keyUp(evt) {
   switch (evt.keyCode) {
@@ -29,7 +30,7 @@ function keyUp(evt) {
       goDown = false;
     break;
 
-    case fire:
+    case space:
       fire = false;
     break;
   }
@@ -53,7 +54,7 @@ function keyDown(evt) {
       goDown = true;
     break;
 
-    case fire:
+    case space:
       fire = true;
     break;
   }
