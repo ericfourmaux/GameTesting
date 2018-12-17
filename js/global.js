@@ -29,18 +29,17 @@ function update() {
   }
 
   if (fire) {
-    bullet.x = player.x + (player.w + 1);
-    bullet.y = player.y + (player.h / 3);
-    bullet.x += bullet.vx;
+    //bullet.vx += 4;
+    //bullet.x += bullet.vx;
+    bulletArr.push(bullet);
     bullet.hasFired = true;
-    //console.log(bullet.hasFired);
   }
 
-/*
+
   if (!fire) {
     bullet.hasFired = false;
   }
-*/
+
 
   player.x += player.vx;
   player.y += player.vy;
@@ -59,10 +58,9 @@ function update() {
 
 
 
-document.getElementById("stats").innerHTML = "player.vx: " + Math.floor(player.vx) + " - " +
-                                             "player.vy: " + Math.floor(player.vy) + " - " +
-                                             "bullet : " + bullet.hasFired;
-
+document.getElementById("stats").innerHTML = "p.vx: " + Math.floor(player.vx) + " - " +
+                                             "p.vy: " + Math.floor(player.vy) + " - " +
+                                             "blt : " + bullet.hasFired;
 
   render();
 }
@@ -78,16 +76,28 @@ function render() {
   ctx.stroke();
 
   //Display player
-    ctx.fillRect(player.x, player.y, player.w, player.h);
+  ctx.fillRect(player.x, player.y, player.w, player.h);
 
   //Display bullet
   if (bullet.hasFired) {
-    ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
-    do {
-      bullet.x += bullet.vx;
-      bullet.vx += 4;
-    }
-    while (bullet.x < canvas.width);
-    bullet.hasFired = false;
+    drawBullet();
   }
+}
+
+function drawBullet() {
+  bullet.x = player.x + (player.w + 1);
+  bullet.y = player.y + (player.h / 3);
+
+  while (bullet.x < canvas.width) {
+    ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+    bullet.vx += 4;
+    bullet.x += bullet.vx;
+    if (bullet.x >= canvas.width) {
+      delete bullet;
+      bulletArr.slice(bullet,1);
+      //bullet.hasFired = false;
+    }
+    console.log("blt.x: " + bullet.x);
+  }
+
 }

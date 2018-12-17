@@ -7,5 +7,9 @@ var bullet = {
   vx : 0,
   vy : 0,
 
+  id : 0,
+
   hasFired : false
 }
+
+var bulletArr = [];
