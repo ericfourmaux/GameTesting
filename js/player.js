@@ -10,8 +10,5 @@ var player = {
   isOnGround : false,
 
   friction : 0.96,
-  gravity : 0.3,
-
-  speedLimit : -10,
-  jumpForce : .1
+  gravity : 0.3
 }
