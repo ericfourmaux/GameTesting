@@ -1,5 +1,9 @@
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext("2d");
+
+
+
+
 update();
 
 
@@ -31,21 +35,17 @@ function update() {
   if (fire) {
     bullet.x = player.x + (player.w + 1);
     bullet.y = player.y + (player.h / 3);
-    bullet.x += bullet.vx;
     bullet.hasFired = true;
     //console.log(bullet.hasFired);
   }
 
-/*
   if (!fire) {
     bullet.hasFired = false;
   }
-*/
 
   player.x += player.vx;
   player.y += player.vy;
   player.vy += player.gravity;
-  //bullet.hasFired = false;
 
   if (player.isOnGround) {
     player.vx *= player.friction;
@@ -57,15 +57,14 @@ function update() {
     player.vy -= player.gravity;
   }
 
-
-
-document.getElementById("stats").innerHTML = "player.vx: " + Math.floor(player.vx) + " - " +
-                                             "player.vy: " + Math.floor(player.vy) + " - " +
-                                             "bullet : " + bullet.hasFired;
-
+  document.getElementById("stats").innerHTML = "Shot: " + bullet.hasFired;
 
   render();
 }
+
+
+
+
 
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -78,16 +77,18 @@ function render() {
   ctx.stroke();
 
   //Display player
-    ctx.fillRect(player.x, player.y, player.w, player.h);
+  ctx.fillRect(player.x, player.y, player.w, player.h);
 
   //Display bullet
-  if (bullet.hasFired) {
-    ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
-    do {
-      bullet.x += bullet.vx;
+  if (bullet.hasFired == true) {
+      var shot = bullet.x + bullet.vx;
       bullet.vx += 4;
-    }
-    while (bullet.x < canvas.width);
-    bullet.hasFired = false;
+
+      ctx.fillRect(shot, bullet.y, bullet.w, bullet.h);
+      if (shot >= canvas.width) {
+        delete bullet;
+      }
+
   }
+
 }
