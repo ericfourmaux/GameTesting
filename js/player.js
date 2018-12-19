@@ -10,5 +10,7 @@ var player = {
   isOnGround : false,
 
   friction : 0.96,
-  gravity : 0.3
+  gravity : 0.3,
+
+  canShoot: true
 }

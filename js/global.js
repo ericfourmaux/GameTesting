@@ -37,11 +37,6 @@ function update() {
     bulletArr.push(bullet);
     bullet.x = player.x + (player.w + 1);
     bullet.y = player.y + (player.h / 3);
-<<<<<<< HEAD
-    bullet.hasFired = true;
-    //console.log(bullet.hasFired);
-=======
->>>>>>> AtWork
   }
 
   if (!fire) {
