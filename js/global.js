@@ -34,9 +34,9 @@ function update() {
   if (fire) {
     bullet.id ++;
     bullet.hasFired = true;
-    bulletArr.push(bullet);
     bullet.x = player.x + (player.w + 1);
     bullet.y = player.y + (player.h / 3);
+    bulletArr.push(bullet);
   }
 
   if (!fire) {
@@ -81,19 +81,14 @@ function render() {
   ctx.fillRect(player.x, player.y, player.w, player.h);
 
   //Display bullet
-  if (bulletArr.length >= 1) {
-        bullet.vx += 4;
-        ctx.fillRect(bullet.x + bullet.vx, bullet.y, bullet.w, bullet.h);
-        for (var i=0; i < bulletArr.length; i++) {
-          if (bulletArr[i].vx >= canvas.width) {
-            console.log("OUT!");
-            //delete bulletArr[i];
-            bullet.x = 0;
-            bulletArr.splice(bulletArr[i],1);
-            console.log(bulletArr.length);
-          }
-        }
-        bullet.hasFired = false;
+  if (bullet.id > 0) {
+    bullet.vx += 3;
+    ctx.fillRect(bullet.x + bullet.vx, bullet.y, bullet.w, bullet.h);
+
+    if (bullet.vx > canvas.width) {
+      console.log("OUT!");
+      bulletArr.splice(bullet, 1);
+    }
   }
 
 }
