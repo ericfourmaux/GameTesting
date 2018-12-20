@@ -31,6 +31,7 @@ function keyUp(evt) {
     break;
 
     case space:
+      evt.preventDefault();
       fire = false;
     break;
   }
@@ -55,6 +56,7 @@ function keyDown(evt) {
     break;
 
     case space:
+      //evt.preventDefault();
       fire = true;
     break;
   }

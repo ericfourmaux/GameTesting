@@ -11,12 +11,12 @@ function update() {
   requestAnimationFrame(update, canvas);
   if (goLeft && !goRight) {
     player.vx -= 1;
-    player.friction = .9;
+    player.friction = .8;
   }
 
   if (goRight && !goLeft) {
     player.vx += 1;
-    player.friction = .9;
+    player.friction = .8;
   }
 
   if (jump && player.isOnGround) {
@@ -36,6 +36,8 @@ function update() {
     bullet.hasFired = true;
     bullet.x = player.x + (player.w + 1);
     bullet.y = player.y + (player.h / 3);
+    bullet.vx = 0;
+    console.log(bullet);
     bulletArr.push(bullet);
   }
 
@@ -46,7 +48,6 @@ function update() {
   player.x += player.vx;
   player.y += player.vy;
   player.vy += player.gravity;
-  //bullet.hasFired = false;
 
   if (player.isOnGround) {
     player.vx *= player.friction;
@@ -81,13 +82,14 @@ function render() {
   ctx.fillRect(player.x, player.y, player.w, player.h);
 
   //Display bullet
-  if (bullet.id > 0) {
-    bullet.vx += 3;
-    ctx.fillRect(bullet.x + bullet.vx, bullet.y, bullet.w, bullet.h);
-
-    if (bullet.vx > canvas.width) {
-      console.log("OUT!");
-      bulletArr.splice(bullet, 1);
+  if (bullet.hasFired = true) {
+    for (var i=1; i < bulletArr.length; i++) {
+      bulletArr[i].vx += 2;
+      ctx.fillRect(bulletArr[i].x + bulletArr[i].vx, bulletArr[i].y, bulletArr[i].w, bulletArr[i].h);
+      if (bulletArr[i].vx > canvas.width) {
+        console.log("bullet is OUT!");
+        bulletArr.splice(bulletArr[i], 1);
+      }
     }
   }
 
